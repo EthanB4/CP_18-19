@@ -9,12 +9,8 @@ The files age are as follows:
 
 4.CyberpatriotV3.ps1
 
-5.CyberpatriotV4.ps1
+5.CyberpatriotV5.ps1
 
-6.CyberpatriotV5.ps1
+6.CyberpatriotV6.ps1
 
-7.CyberpatriotV6.ps1
-
-8.CyberpatriotV7.ps1
-
-9.CyberpatriotV8.ps1 - Newest Version
+7.CyberpatriotV8.ps1 - Newest Version
