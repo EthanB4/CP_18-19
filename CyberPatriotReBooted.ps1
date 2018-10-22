@@ -46,28 +46,28 @@ else
 
    }
    #Start up Picture
-
 Start-sleep -milliseconds 500
 write-host ""
 Write-host ""
 Write-host ""
 Write-host ""
-Write-host "                           /\                              " -fore Yellow
-Write-host "                          /  \                             " -Fore Yellow
-Write-host "                         /    \                            " -fore Yellow
-Write-host "                        /      \                           " -fore Yellow
-Write-host "                       /        \                          " -fore yellow
-Write-host "                      /          \                         " -fore yellow
-Write-host "                     /            \                        " -fore Yellow
-write-host "                    /______________\                       " -fore yellow
-Write-host "                   / \            / \                      " -fore yellow
-write-host "                  /   \          /   \                     " -fore yellow
-write-host "                 /     \        /     \                    " -fore yellow
-Write-host "                /       \      /       \                   " -fore yellow
-write-host "               /         \    /         \                  " -fore yellow
-Write-host "              /           \  /           \                 " -fore yellow
-Write-host "             /             \/             \                " -fore yellow
-Write-host "            /______________________________\               " -fore Yellow
+$Thing = (Get-Random -InputObject "Red", "Yellow", "Blue", "Cyan", "White", "Magenta", "DarkCyan")
+Write-host "                           /\                              " -fore ($Thing)
+Write-host "                          /  \                             " -Fore ($Thing)
+Write-host "                         /    \                            " -fore ($Thing)
+Write-host "                        /      \                           " -fore ($Thing)
+Write-host "                       /        \                          " -fore ($Thing)
+Write-host "                      /          \                         " -fore ($Thing)
+Write-host "                     /            \                        " -fore ($Thing)
+write-host "                    /______________\                       " -fore ($Thing)
+Write-host "                   / \            / \                      " -fore ($Thing)
+write-host "                  /   \          /   \                     " -fore ($Thing)
+write-host "                 /     \        /     \                    " -fore ($Thing)
+Write-host "                /       \      /       \                   " -fore ($Thing)
+write-host "               /         \    /         \                  " -fore ($Thing)
+Write-host "              /           \  /           \                 " -fore ($Thing)
+Write-host "             /             \/             \                " -fore ($Thing)
+Write-host "            /______________________________\               " -fore ($Thing)
 write-host "                CyberPatriot 2018-2019                     " -fore gray
 Write-host ""
 Start-sleep -milliseconds 1000
@@ -103,12 +103,18 @@ Write-Host "2: Set Users Passwords"
 Write-Host "3: Disable User Accounts"
 Write-host "4: Find a File"
 Write-Host "Q:Press 'Q' to quit."
+""
+$Random = Get-Random -InputObject "Red", "Yellow", "Blue", "Cyan", "White", "DarkGreen", "DarkBlue", "DarkRed", "DarkCyan"
+$Text = Get-Random -InputObject "This is for CybperPatriot 2018-2019", "Beep Boop", "This version is for Windows 10 and Server 2016", "I don't know what to put here, but...", "AKSJHfslkhsakdhglakshdg", "This is for CybperPatriot 2018-2019", "Beep Boop", "This version is for Windows 10 and Server 2016", "I don't know what to put here, but...", "AKSJHfslkhsakdhglakshdg", "This is for CybperPatriot 2018-2019", "Beep Boop", "This version is for Windows 10 and Server 2016", "I don't know what to put here, but...", "AKSJHfslkhsakdhglakshdg", "This is for CybperPatriot 2018-2019", "Beep Boop", "This version is for Windows 10 and Server 2016", "I don't know what to put here, but...", "AKSJHfslkhsakdhglakshdg", "This is for CybperPatriot 2018-2019", "Beep Boop", "This version is for Windows 10 and Server 2016", "I don't know what to put here, but...", "AKSJHfslkhsakdhglakshdg", "404", "The", "Secret", "Code", "Is"
+Write-Host "$Text" -Fore ($Random)
 }
 
 do
 {
 # Generate the options for choices in the Main Menu
     Show-Menu
+    ""
+    ""
        $input = Read-Host "Please select one"
        Switch($input)
     {
@@ -239,6 +245,7 @@ do
   {
   Write-Warning "$Filetype is not a choice, please choose (E) or (F)"
   pause
+  $Confirm = "Are you finished looking? (Y/N)"
   }
   if($Filetype -eq 'f')
   {
