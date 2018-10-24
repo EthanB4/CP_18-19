@@ -13,7 +13,9 @@ The files age are as follows:
 
 6.CyberpatriotV6.ps1
 
-7.CyberpatriotV8.ps1 - Newest Version
+7.CyberpatriotV8.ps1
+
+8.CyberpatriotRebooted.ps1 -Newest Version
 
 Windows 7
 
