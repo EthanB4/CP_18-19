@@ -75,9 +75,11 @@ clear-host
 
 Function Show-Team
 {
-Write-host "           _____     ____       ______     " -fore red
-Write-host "          / / | |   /    \     / / | |     " -fore red
-Write-host "         / /  | |  |  /\  |   / /  | |     " -fore red
+Write-host "             ___     ____         ___      " -fore red
+Write-host "            /   |   /    \       /   |     " -fore red
+Write-host "           / /| |  |  /\  |     / /| |     " -fore red
+Write-host "          / / | |  | |  | |    / / | |     " -fore red
+Write-host "         / /  | |  | |  | |   / /  | |     " -fore red
 Write-host "        / /___| |  | |  | |  / /___| |     " -fore red
 Write-host "       /______| |  | |  | | /______| |     " -fore red
 Write-host "              | |  |  \/  |        | |     " -fore red
@@ -102,6 +104,7 @@ Write-host "1: Set User Password Policy"
 Write-Host "2: Set Users Passwords"
 Write-Host "3: Disable User Accounts"
 Write-host "4: Find a File"
+Write-host "5: Give me a random number"
 Write-Host "Q:Press 'Q' to quit."
 ""
 $Random = Get-Random -InputObject "Red", "Yellow", "Blue", "Cyan", "White", "DarkGreen", "DarkBlue", "DarkRed", "DarkCyan"
@@ -183,7 +186,7 @@ do
        
        Show-User-Info
        
-       $input = Read-Host "Please Select User you want changed"
+       $input = Read-Host "Please select user you want changed ('0' to exit)"
 
        if($input -eq '0')
 {
@@ -228,7 +231,7 @@ do
 
   
 
-   $input = Read-host "Please Choose which user you want disabled"
+   $input = Read-host "Please choose which user you want disabled ('0' to exit)"
    Disable-LocalUser ($input) -Confirm -ErrorAction SilentlyContinue
    start-sleep -Milliseconds 500
    cls
@@ -252,11 +255,19 @@ do
   ""
   ""
   $Filename = Read-host "What is the name of the file? ((Filename).(Extension))"
+  if(($Filename -ne '') -and ($Filetype -eq 'f'))
+  {
   gci ($Filename) -path C:\Users -force -recurse  -erroraction silentlycontinue
   ""
   ""
   ""
   $End = Read-host "Are you finished looking?(Y/N)"
+  }
+  else
+  {
+  write-warning "Filename cannot be empty, please put something"
+  pause
+  }
   }
   If($Filetype -eq 'E')
          {
@@ -265,7 +276,7 @@ do
   $Filename = Read-host "What Extension are you looking for (*.(Extension Here))"
    If($Filename -eq '')
   {
-  write-warning "Please put SOMETHING"
+  write-warning "extension cannot be empty, please put an extension."
   pause
   }
   If($Filename -eq '*.txt')
@@ -325,23 +336,67 @@ If(($Filename -ne '') -and ($FileType -eq 'E'))
     Write-Host ""
     Start-sleep -seconds 2.5
 
+        }'5'{
+        do
+          {
+          cls
+        $Number1 = Read-Host "What is the minimum number you want?"
+        if($Number1 -eq '')
+        {
+        Write-Host -NoNewline "WARNING: This field cannot be blank" -fore yellow 
+        Read-Host " "
+        }
+        if($Number1 -ne '')
+        {
+        $Number2 = Read-Host "What is the maximum number you want?"
+          if($Number2 -eq '')
+        {
+        Write-Host -NoNewline "WARNING: This field cannot be blank" -fore Yellow 
+        Read-host " "
+        }
+        }
+        if(($Number1 -ne '') -and ($Number2 -ne ''))
+        {
+        $Value1 = $Number1 -as [Double]
+        $Value2 = $Number2 -as [Double]
+        $ok = ($Value1 -ne $NULL) -and ($Value2 -ne $NULL)
+        if ($ok){
+        ""
+        ""
+        Write-host "Here is your number!" -fore Cyan
+        Get-random -Minimum ($Number1) -Maximum ($Number2)
+        pause
+        }
+        else 
+        {
+        Write-Warning "Please input numbers only"
+        (start-sleep -Milliseconds 2500)
+        }
+        }
+           }
+        until ($ok)
         }'q'{
              ""
        ""
        $input = Read-host "Are You Sure?(Y/N)"
        If($input -eq 'y')
        {
+       $Random = Get-Random -InputObject "Red", "Yellow", "Blue", "Cyan", "White", "DarkGreen", "DarkBlue", "DarkRed", "DarkCyan"
+       ""
+       ""
+       Write-Host "Goodbye" -Fore ($Random)
+       Start-sleep -milliseconds 2500
        return
        }
   
     }
         }
         start-sleep -milliseconds 15
-    If(($input -ne '1') -and ($input -ne '2') -and ($input -ne '3') -and ($input -ne '4') -and ($input -ne '404') -and ($input -ne '0'))
+    If(($input -ne '1') -and ($input -ne '2') -and ($input -ne '3') -and ($input -ne '4') -and ($input -ne '404') -and ($input -ne '0') -and ($input -ne '5'))
     {
     ""
     ""
-    Write-Warning "$input is not a choice"
+    Write-Warning "$input is not one of the listed choices, please input a valid choice."
     pause
     }
   #End the Loop
