@@ -11,7 +11,7 @@ echo ""
 printf "$CYAN creating the password policy $BLANK"
 echo ""
 echo ""
-#sudo sed -i '/sha512/s/$/ minlen=10 remember=5 retry=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1/' /etc/pam.d/common-password
+sudo sed -i '/sha512/s/$/ minlen=10 remember=5 retry=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1/' /etc/pam.d/common-password
 echo ""
 echo -e "Set "$YELLOW"MINIMUM PASSWORD LENGTH$BLANK to 10"
 echo ""
@@ -38,7 +38,7 @@ echo ""
 printf "$RED Setting up the Max and Min password ages $BLANK"
 echo ""
 echo ""
-#for i in $(awk -F':' '/\/home.*sh/ { print $1}' /etc/passwd); do sudo chage -m 3 -M 30 -W 7 $i; done
+for i in $(awk -F':' '/\/home.*sh/ { print $1}' /etc/passwd); do sudo chage -m 3 -M 30 -W 7 $i; done
 echo -e "Set "$YELLOW"MAX_PASS_DAYS$BLANK to 30"
 echo ""
 sleep 1
