@@ -100,7 +100,7 @@ Function Show-Menu
 cls
 Write-Host -fore Red ("========== $Title ==========")
 
-Write-host "1: Set User Password Policy"
+Write-host "1: Set Password Policy and Audit Policy"
 Write-Host "2: Set Users Passwords"
 Write-Host "3: Disable User Accounts"
 Write-host "4: Find a File"
@@ -147,11 +147,11 @@ do
  Write-Host ""
  Write-Host "" 
 
- # Configure the Password Policy and Account Lockout
- write-Host ("Configuring Password History,Complexity, and the Lockout Policy.") -ForegroundColor cyan
+ # Configure the Password Policy, Account Lockout and Audit Policy
+ write-Host ("Configuring Password History, Complexity, the Lockout Policy and the Audit Policy.") -ForegroundColor cyan
  write-host ""
  secedit /export /cfg c:\secpol.cfg
- (gc C:\secpol.cfg).replace("PasswordComplexity = 0", "PasswordComplexity = 1") | Out-File C:\secpol.cfg; (gc C:\secpol.cfg).replace("LockoutBadCount = 0", "LockoutBadCount = 6")  | Out-File C:\secpol.cfg; (gc C:\secpol.cfg).replace("PasswordHistorySize = 0", "PasswordHistorySize = 5") | Out-File C:\secpol.cfg; (gc C:\secpol.cfg).replace("EnableGuestAccount = 1", "EnableGuestAccount = 0") | Out-File C:\Secpol.cfg
+ (gc C:\secpol.cfg).replace("PasswordComplexity = 0", "PasswordComplexity = 1") | Out-File C:\secpol.cfg; (gc C:\secpol.cfg).replace("LockoutBadCount = 0", "LockoutBadCount = 6")  | Out-File C:\secpol.cfg; (gc C:\secpol.cfg).replace("PasswordHistorySize = 0", "PasswordHistorySize = 5") | Out-File C:\secpol.cfg; (gc C:\secpol.cfg).replace("EnableGuestAccount = 1", "EnableGuestAccount = 0") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("EnableAdminAccount = 1", "EnableAdminAccount = 0") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("AuditLogonEvents = 0", "AuditLogonEvents = 3") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("AuditPolicyChange = 0", "AuditPolicyChange = 1") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("AuditAccountManage = 0", "AuditAccountManage = 1") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("AuditDSAccess = 0", "AuditDSAccess = 1") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("AuditAccountLogon = 0", "AuditAccountLogon = 1") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DontDisplayLastUserName=4,0", "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DontDisplayLastUserName=4,1") | Out-File C:\Secpol.cfg; (gc C:\secpol.cfg).replace("MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD=4,1", "MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableCAD=4,0") | Out-File C:\secpol.cfg; 
  secedit /configure /db c:\windows\security\local.sdb /cfg c:\secpol.cfg /areas SECURITYPOLICY
  rm -force c:\secpol.cfg -confirm:$false
  Write-host ""
@@ -170,6 +170,35 @@ do
  Write-Host "Password Complexity set to 'Enabled'" -ForegroundColor Green
  Start-sleep -Milliseconds 500
  Write-host ""
+ Write-host ""
+ Write-Host "Audit Account Logon Events set to 'Success'" -Fore Green
+ Start-sleep -Milliseconds 500
+ write-host ""
+ Write-host ""
+ Write-Host "Audit Account Managment set to 'Success'" -Fore Green
+ Start-Sleep -Milliseconds 500
+ Write-Host ""
+ Write-Host ""
+ Write-Host "Audit Directory Service Access set to 'Success'" -Fore Green
+ Start-sleep -Milliseconds 500
+ Write-host ""
+ Write-host ""
+ Write-Host "Audit Logon Events set to 'Success,Failure'" -Fore Green
+ Start-sleep -Milliseconds 500
+ write-host ""
+ write-host ""
+ Write-Host "Audit Policy Change set to 'Success'" -Fore Green
+ Start-sleep -Milliseconds 500
+ write-host ""
+ write-host ""
+ Write-host "Interactive Logon: Disable CTRL+ALT+DEL set to 'Disabled' (IF IT WAS TURNED ON!)" -fore Green
+ start-sleep -Milliseconds 500
+ Write-Host ""
+ Write-Host ""
+ Write-host "Interactive Logon: Don't Display Last User Signed in to 'Enabled'" -Fore Green
+ start-sleep -Milliseconds 500
+ Write-Host ""
+ Write-Host ""
 
 
  
